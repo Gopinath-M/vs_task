@@ -1,0 +1,11 @@
+<% if @advocate_case.errors.any? %>
+		alert("<%= @advocate_case.errors.full_messages.join(',') %>");
+<%else%>
+	<% if @case.errors.any? %>
+		alert("<%= @case.errors.full_messages.join(',') %>");
+	<%else%>
+		// $('.row_<%#= @case.id %>').remove();
+		// $('.advocate_cases').html("<%#= j(render '/cases/cases') %>");
+		location.assign("<%= cases_path %>");
+	<%end%>
+<%end%>

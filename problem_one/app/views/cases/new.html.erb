@@ -1,0 +1,35 @@
+<div class="col-md-4 col-md-offset-4">
+  <h2>Add Case</h2>
+
+  <%= form_for :case, url: cases_path, method: :post, remote: true do |f| %>
+
+    <div class="form-group">
+      <%= f.label :case_no %><br />
+      <%= f.text_field :case_no , class: "form-control", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :name %><br />
+      <%= f.text_field :name , class: "form-control", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %><br />
+      <%= f.text_area :description, class: "form-control", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :state %><br />
+      <%= f.select :state_id, options_for_select(State.active.map{|m| [m.name,m.id]}), {prompt: "Select State"} , {class: "form-control", required: true} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :assign_to %><br />
+      <%= select_tag :assign_to_id, options_for_select(current_advocate.case_assign_to.map{|a| [a.full_name,a.id]}), {class: "form-control"} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Create", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Advocate Management</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <% if advocate_signed_in? %>
+      	<li class="<%= 'active' if controller_name == 'practicing_states' && action_name == 'index' %>"><a href="/practicing_states" class='nav-link'>Practicing States</a></li>
+      	<li class="<%= 'active' if controller_name == 'dashboard' && action_name == 'index' %>"><a href="/" class='nav-link'>New Cases</a></li>
+      	<li class="<%= 'active' if controller_name == 'cases' && action_name == 'index' %>"><a href="/cases" class='nav-link'>Handle Cases</a></li>
+      	<% if current_advocate.senior_laywer? %>
+	      	<li class="<%= 'active' if controller_name == 'advocates' && action_name == 'index' %>"><a href="/advocates" class='nav-link'>New advocates</a></li>
+	      	<li class="<%= 'active' if controller_name == 'advocates' && action_name == 'assitants' %>"><a href="/advocates/assitants" class='nav-link'>Assitants</a></li>
+      	<%end%>
+      <%end%>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    	<% if advocate_signed_in? %>
+			  <li><a href="#">Logged in as <strong><%= current_advocate.email %></strong>.</a></li>
+			  <li class="nav-item <%= 'active' if controller_name == 'registrations' && action_name == 'edit' %>"><%= link_to 'Edit profile', edit_advocate_registration_path, :class => 'nav-link' %></li>
+			  <li class="nav-item"><%= link_to "Logout", destroy_advocate_session_path, :class => 'nav-link'  %></li>
+			<% else %>
+			  <li class="nav-item">
+			  	<%= link_to new_advocate_registration_path, class: 'nav-link' do  %>
+			  		<span class="glyphicon glyphicon-user"></span> Sign up
+			  	<%end%>	
+			  </li>
+			  <li class="nav-item">
+			  	<%= link_to new_advocate_session_path, :class => 'nav-link' do %>
+			  		<span class="glyphicon glyphicon-log-in"></span> Login
+			  	<%end%>
+			  </li>
+			<% end %>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,7 @@
+<% if @errors.any? %>
+	alert("<%= @errors.uniq.join(',') %>");
+<%else%>
+	// $('.row_<%#= @case.id %>').remove();
+	// $('.advocate_cases').html("<%#= j(render '/cases/cases') %>");
+	location.assign("<%= practicing_states_path %>");
+<%end%>

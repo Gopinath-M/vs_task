@@ -1,0 +1,6 @@
+State.all.each.with_index(1000) do |state,index|
+	(1..10).each do |i|
+		c = Case.find_or_initialize_by(case_no: "#{state.short_name} #{index+i}")
+		c.update(state_id: state.id,name: "#{state.name} #{i}", description: "Under the common law (law originating from custom and court decisions rather than statutes), murder was an intentional killing that was: unlawful (in other words, not legally justified), and committed with malice aforethought. Malice aforethought doesn't mean that a killer has to have acted out of spite or hate. It exists if a defendant intends to kill someone without legal justification or excuse. In addition, in most states, malice aforethought isn't limited to intentional killings. It can also exist if the killer: intentionally inflicts serious bodily harm that causes the victim's death, or behaves in a way that shows extreme, reckless disregard for life and results in the victim's death. In today's society, murder is defined by statute rather than common law. Though today's statutes derive from common law, one has to look to these statutes for important distinctions—like the difference between first- and second-degree murder.",case_status_id: CaseStatus.new_case.try(:id))
+	end
+end

@@ -1,0 +1,15 @@
+<% @cases.each do |c| %>
+	<tr class="row_<%= c.id %>">
+		<td><%= c.try(:case).case_no %></td>
+		<td><%= c.try(:case).name %></td>
+		<td><%= c.try(:case_status).try(:name) %></td>
+		<td><%= c.try(:assign_laywer).try(:full_name) %></td>
+		<td>
+			<% if current_advocate.senior_laywer? && c.try(:case_status).try(:practicing_case?) %>
+				<%= link_to "Close Case", "javascript:void(0);", "data-url"=>close_case_cases_path, "data-case"=>c.id, data: {confirm: "Are you sure?"} , class: "btn btn-primary close_case" %>
+			<%else%>
+				-
+			<%end%>
+		</td>
+	</tr>
+<%end%>

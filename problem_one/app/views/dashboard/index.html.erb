@@ -1,0 +1,51 @@
+<div class="container-fluid dashboard_container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h3>New Cases</h3>
+			<% if current_advocate.senior_laywer? %>
+				<%= link_to "Add Case", new_case_path, class: "btn btn-primary", style: "float:left" %>
+			<%end%>
+			<%= select_tag :state_id, options_for_select(State.active.map{|m| [m.name,m.id]},@state_id), {prompt: "Select State", class: "form-control new_case_state", "data-url"=> dashboard_index_path , required: true, style: "float:right;width: 180px;"} %>
+			<div class="col-md-12">
+				<div class="table-responsive">
+	      	<table class="table align-items-center table-flush">
+	          <thead class="thead-light">
+	          	<tr>
+	    					<th>Case No.</th>
+	    					<th>Case Name</th>
+	    					<th>Actions</th>
+	    				</tr>
+	          </thead>
+	          <tbody class="index_cases">
+	          	<%= render "/cases/index_cases" %>
+	          </tbody>
+	        </table>
+       	</div>
+      </div>
+		</div>
+	</div>
+</div>
+
+<div id="caseModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Case Assignment</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag take_case_cases_path, method: :post, remote: true do %>
+        	<%= hidden_field_tag :case_id, id: "case_id" %>
+        	<div class="form-group">
+        		<label>Assign To</label>
+        		<%= select_tag :assign_to_id, options_for_select(current_advocate.case_assign_to.map{|a| [a.full_name,a.id]}), {class: "form-control"} %>
+        	</div>
+        <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

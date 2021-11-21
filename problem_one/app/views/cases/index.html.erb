@@ -1,0 +1,26 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h3>Practicing Cases</h3>
+      <% if current_advocate.senior_laywer? %>
+        <%= link_to "Add Case", new_case_path, class: "btn btn-primary" %>
+      <%end%>
+			 <div class="table-responsive">
+      	<table class="table align-items-center table-flush">
+          <thead class="thead-light">
+          	<tr>
+    					<th>Case No.</th>
+    					<th>Case Name</th>
+              <th>Case Status</th>
+              <th>Assign To</th>
+    					<th>Actions</th>
+    				</tr>
+          </thead>
+          <tbody class="advocate_cases">
+          	<%= render "/cases/cases" %>
+          </tbody>
+        </table>
+       </div>
+		</div>
+	</div>
+</div>

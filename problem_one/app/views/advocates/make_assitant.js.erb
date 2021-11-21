@@ -1,0 +1,6 @@
+<% if @advocate.errors.any? %>
+	alert("<%= @advocate.errors.full_messages.join(',') %>");
+<%else%>
+	$('.advocate_row_<%= @advocate.id %>').remove();
+	$('.advocate_lists').html("<%= j(render '/advocates/advocates') %>");
+<%end%>

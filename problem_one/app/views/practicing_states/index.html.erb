@@ -1,0 +1,32 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h3>Practicing State</h3>
+			<div class="col-md-12">
+				<% if current_advocate.honor.present? %>
+					<strong>Your senior practing states are as follows:</strong>
+					<% current_advocate.honor.practicing_states.each do |state| %>
+						<span class="state_detail"><%= state.try(:state).try(:name) %></span>
+					<%end%>	
+				<%end%>
+			</div>
+			<div class="col-md-12">
+				<% current_advocate.practicing_states.each do |state| %>
+					<span class="state_detail"><%= state.try(:state).try(:name) %> <%= link_to "x", practicing_state_path(state),data:{confirm: "Are you sure?"} ,method: :delete,remote: true %></span>
+				<%end%>
+			</div>
+			<div class="col-md-12">
+				<div class="table-responsive">
+					<%= form_for current_advocate, url: practicing_states_path, method: :post, remote: true do |f| %>
+					  <div class="form-group">
+					    <%= f.select :state_id, options_for_select(State.active.map{|m| [m.name,m.id]},current_advocate.practicing_states.collect(&:state_id)), {prompt: "Select State"} , {class: "form-control", required: true, multiple: :multiple, style: "height:400px;"} %>
+					  </div>
+					  <div class="form-group">
+					  	<%= f.submit "Join", class: "btn btn-primary" %>
+					  </div>
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

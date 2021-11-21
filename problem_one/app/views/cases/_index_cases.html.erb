@@ -1,0 +1,14 @@
+<% @cases.each do |c| %>
+	<tr class="row_<%= c.id %>">
+		<td><%= c.case_no %></td>
+		<td><%= c.name %></td>
+		<td>
+			<%= link_to "Show", case_path(c), class: "btn btn-primary" %>
+			<% if current_advocate.senior_laywer? %>
+				<%= link_to "Reject", "javascript:void(0);", "data-url"=> reject_case_cases_path, "data-case"=>c.id , data: {confirm: "Are you sure?"}, class: "btn btn-danger reject_case" %>
+			<%end%>
+		</td>
+	</tr>
+<%end%>
+
+<%= will_paginate @cases, renderer: BootstrapPagination::Rails %>

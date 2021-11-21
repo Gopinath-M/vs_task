@@ -1,0 +1,5 @@
+<% if @advocate_case.errors.any? %>
+	alert("<%= @advocate_case.errors.full_messages.join(',') %>");
+<%else%>
+	location.assign("<%= cases_path %>");
+<%end%>

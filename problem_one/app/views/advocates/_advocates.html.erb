@@ -1,0 +1,16 @@
+<% @advocates.each.with_index(1) do |a,index| %>
+	<tr class="advocate_row_<%= a.id %>">
+		<td><%= index %></td>
+		<td><%= a.full_name %></td>
+		<td><%= "#{a.experience} Year".pluralize(a.experience.to_i) %></td>
+		<td>
+			<% if current_advocate.senior_laywer? %>
+				<% if a.honor_id.present? %>
+					<%= link_to "Remove assitant", "javascript:void(0)", 'data-advocate'=> a.id, 'data-url'=>remove_assitant_advocates_path , class: "btn btn-primary remove_assitant" %>
+				<%else%>
+					<%= link_to "Make assitant", "javascript:void(0)", 'data-advocate'=> a.id, 'data-url'=>make_assitant_advocates_path , class: "btn btn-primary make_assitant" %>
+				<%end%>
+			<%end%>
+		</td>
+	</tr>
+<%end%>
